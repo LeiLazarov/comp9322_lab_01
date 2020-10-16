@@ -1,0 +1,103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "pets board",
+    "version": "0.0.1",
+    "title": "pets Board"
+  },
+  "basePath": "/api",
+  "paths": {
+    "/pets": {
+      "post": {
+        "summary": "add a pet",
+        "description": "",
+        "operationId": "addPet",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A pet has an id and a name",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pets"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "CREATED"
+          },
+          "405": {
+            "description": "INVALID"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "List pets",
+        "description": "List all pets",
+        "operationId": "getPets",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pets"
+              }
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "definitions": {
+    "Pets": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 2
+        },
+        "name": {
+          "type": "string",
+          "example": "example"
+        }
+      }
+    }
+  }
+}
